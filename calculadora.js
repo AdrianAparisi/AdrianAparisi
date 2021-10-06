@@ -3,16 +3,31 @@
 alert("Hola usuario, bienvenido a la calculadora.")
 let repeat = true;
 let operacion;
+let operadores;
+let operador1 = '';
+let operador2 = '';
+let salir = false;
 
-do {
+
+function pedirOperacion(operacion) {
     operacion = prompt("¿Que operación quieres realizar? +, -, * o /.");
     operacion = operacion.trim();
 
-
     if (operacion === '+' || operacion === '-' || operacion === '*' || operacion === '/') {
-        let operador1 = '';
-        let operador2 = '';
-        let salir = false;
+        salir = false;
+    } else {
+        alert('La operación introducida es errónea. Prueba de nuevo.')
+        salir = true;
+    }
+    return operacion;
+}
+
+do {
+    operacion = pedirOperacion(operacion);
+
+        /*let pedirOperadores = function(operadores){
+         
+        }*/
 
         while (!salir) {
             let operadores = prompt('Introduce los numeros separados por espacio', '');
@@ -43,38 +58,66 @@ do {
 
             operador1 = Number(operador1);
             operador2 = Number(operador2);
+
             if (isNaN(operador1) || isNaN(operador2)) {
-                alert('Tienes que introducir números')
+                alert('Tienes que introducir números.')
                 salir = false;
             } else {
                 salir = true;
             }
         }
         let resultado;
+
+        let sum = (operador1, operador2) => {
+            parseInt(operador1, operador1);
+            resultado = operador1 + operador2;
+            return resultado;
+        };
+
+        let res = (operador1, operador2) => {
+            parseInt(operador1, operador1);
+            resultado = operador1 - operador2;
+            return resultado;
+        };
+
+        let mult = (operador1, operador2) => {
+            parseInt(operador1, operador1);
+            resultado = operador1 * operador2;
+            return resultado;
+        };
+
+        let div = (operador1, operador2) => {
+            parseInt(operador1, operador1);
+            resultado = operador1 / operador2;
+            return resultado;
+        };
+
         switch (operacion) {
+
             case '+':
-                resultado = operador1 + operador2;
+                sum(operador1, operador2);
+                alert('El resultado es:' + resultado);
                 break;
 
             case '-':
-                resultado = operador1 - operador2;
+                res(operador1, operador2);
+                alert('El resultado es:' + resultado);
                 break;
 
             case '*':
-                resultado = operador1 * operador2;
+                mult(operador1, operador2);
+                alert('El resultado es:' + resultado);
                 break;
 
             case '/':
-                resultado = operador1 / operador2;
+                div(operador1, operador2);
+                alert('El resultado es:' + resultado);
                 break;
 
         }
-        alert('El resultado es:' + resultado)
+        
         repeat = confirm('Quieres realizar otra operación?');
 
-    } else {
-        alert('La operación introducida es errónea. Prueba de nuevo.')
-    }
-} while ((operacion !== '+' && operacion !== '-' && operacion !== '*' && operacion !== '/') || repeat)
+} while (repeat)
 
 console.log(operacion);
