@@ -9,115 +9,94 @@ let operador2 = '';
 let salir = false;
 
 
-function pedirOperacion(operacion) {
-    operacion = prompt("¿Que operación quieres realizar? +, -, * o /.");
-    operacion = operacion.trim();
+function pedirOperacion() {
+    while (operacion !== '+' && operacion !== '-' && operacion !== '*' && operacion !== '/') {
+        operacion = prompt("¿Que operación quieres realizar? ( +, -, * o /.)");
+        operacion = operacion.trim();
 
-    if (operacion === '+' || operacion === '-' || operacion === '*' || operacion === '/') {
-        salir = false;
-    } else {
-        alert('La operación introducida es errónea. Prueba de nuevo.')
-        salir = true;
+        if (operacion === '+' || operacion === '-' || operacion === '*' || operacion === '/') {
+
+        } else {
+            alert("No es un operando válido...")
+        }
     }
-    return operacion;
 }
 
-do {
-    operacion = pedirOperacion(operacion);
+function validar() {
+    operador1 = "";
+    operador2 = "";
+    let operadores = prompt('Introduce los numeros separados por espacio', '');
 
-        /*let pedirOperadores = function(operadores){
-         
-        }*/
-
-        while (!salir) {
-            let operadores = prompt('Introduce los numeros separados por espacio', '');
-
-            let i = 0;
-            for (; i < operadores.length; i++) {
-                if (operadores[i] !== ' ') {
-                    operador1 += operadores[i];
-                } else {
-                    if (operador1 !== '') {
-                        break;
-                    }
-                }
-            }
-
-            console.log(operador1);
-
-            for (; i < operadores.length; i++) {
-                if (operadores[i] !== ' ') {
-                    operador2 += operadores[i];
-                } else {
-                    if (operador2 !== '') {
-                        break;
-                    }
-                }
-            }
-            console.log(operador2);
-
-            operador1 = Number(operador1);
-            operador2 = Number(operador2);
-
-            if (isNaN(operador1) || isNaN(operador2)) {
-                alert('Tienes que introducir números.')
-                salir = false;
-            } else {
-                salir = true;
+    let i = 0;
+    for (; i < operadores.length; i++) {
+        if (operadores[i] !== ' ') {
+            operador1 += operadores[i];
+        } else {
+            if (operador1 !== '') {
+                break;
             }
         }
-        let resultado;
+    }
 
-        let sum = (operador1, operador2) => {
-            parseInt(operador1, operador1);
-            resultado = operador1 + operador2;
-            return resultado;
-        };
+    console.log(operador1);
 
-        let res = (operador1, operador2) => {
-            parseInt(operador1, operador1);
-            resultado = operador1 - operador2;
-            return resultado;
-        };
-
-        let mult = (operador1, operador2) => {
-            parseInt(operador1, operador1);
-            resultado = operador1 * operador2;
-            return resultado;
-        };
-
-        let div = (operador1, operador2) => {
-            parseInt(operador1, operador1);
-            resultado = operador1 / operador2;
-            return resultado;
-        };
-
-        switch (operacion) {
-
-            case '+':
-                sum(operador1, operador2);
-                alert('El resultado es:' + resultado);
+    for (; i < operadores.length; i++) {
+        if (operadores[i] !== ' ') {
+            operador2 += operadores[i];
+        } else {
+            if (operador2 !== '') {
                 break;
-
-            case '-':
-                res(operador1, operador2);
-                alert('El resultado es:' + resultado);
-                break;
-
-            case '*':
-                mult(operador1, operador2);
-                alert('El resultado es:' + resultado);
-                break;
-
-            case '/':
-                div(operador1, operador2);
-                alert('El resultado es:' + resultado);
-                break;
-
+            }
         }
-        
-        repeat = confirm('Quieres realizar otra operación?');
+    }
+    console.log(operador2);
 
-} while (repeat)
+    operador1 = Number(operador1);
+    operador2 = Number(operador2);
+
+    if (isNaN(operador1) || isNaN(operador2)) {
+        alert('Tienes que introducir números.')
+        return false;
+    } else {
+        return true;
+    }
+}
+
+while (repeat) {
+    pedirOperacion();
+    let pedirOperadores = validar();
+
+    while (!pedirOperadores) {
+        pedirOperadores = validar();
+    }
+    let resultado;
+
+    switch (operacion) {
+
+        case '+':
+            resultado = () => parseInt(operador1 + operador2);
+            alert('El resultado es: ' + resultado());
+            break;
+
+        case '-':
+            resultado = () => parseInt(operador1 - operador2);
+            alert('El resultado es: ' + resultado());
+            break;
+
+        case '*':
+            resultado = () => parseInt(operador1 * operador2);
+            alert('El resultado es: ' + resultado());
+            break;
+
+        case '/':
+            resultado = () => parseInt(operador1 / operador2);
+            alert('El resultado es: ' + resultado());
+            break;
+
+    }
+
+    repeat = confirm('Quieres realizar otra operación?');
+
+}
 
 console.log(operacion);
