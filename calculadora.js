@@ -7,6 +7,7 @@ let operadores;
 let operador1 = '';
 let operador2 = '';
 let salir = false;
+let lastResult = 0;
 
 
 function pedirOperacion() {
@@ -27,8 +28,8 @@ function validar() {
     operador2 = "";
     let operadores = prompt('Introduce los numeros separados por espacio', '');
 
-    let i = 0;
-    for (; i < operadores.length; i++) {
+
+    for (let i = 0; i < operadores.length; i++) {
         if (operadores[i] !== ' ') {
             operador1 += operadores[i];
         } else {
@@ -49,6 +50,7 @@ function validar() {
             }
         }
     }
+
     console.log(operador2);
 
     operador1 = Number(operador1);
@@ -62,6 +64,41 @@ function validar() {
     }
 }
 
+let calculator = {
+    sum(operadores) {
+        let operador1 = Number(operadores[0]);
+        let operador2 = Number(operadores[1]);
+        resultado = operador1 + operador2;
+        alert('El resultado es: ' + resultado());
+        return resultado;
+    },
+
+    res(operadores) {
+        let operador1 = Number(operadores[0]);
+        let operador2 = Number(operadores[1]);
+        resultado = operador1 - operador2;
+        alert('El resultado es: ' + resultado());
+        return resultado;
+    },
+
+    mul(operadores) {
+        let operador1 = Number(operadores[0]);
+        let operador2 = Number(operadores[1]);
+        resultado = operador1 * operador2;
+        alert('El resultado es: ' + resultado());
+        return resultado;
+    },
+
+    div(operadores) {
+        let operador1 = Number(operadores[0]);
+        let operador2 = Number(operadores[1]);
+        resultado = operador1 / operador2;
+        alert('El resultado es: ' + resultado());
+        return resultado;
+    },
+    lastResult
+};
+
 while (repeat) {
     pedirOperacion();
     let pedirOperadores = validar();
@@ -72,25 +109,20 @@ while (repeat) {
     let resultado;
 
     switch (operacion) {
-
         case '+':
-            resultado = () => parseInt(operador1 + operador2);
-            alert('El resultado es: ' + resultado());
+            calculator.lastResult = calculator.sum(operadores);
             break;
 
         case '-':
-            resultado = () => parseInt(operador1 - operador2);
-            alert('El resultado es: ' + resultado());
+            calculator.lastResult = calculator.res(operadores);
             break;
 
         case '*':
-            resultado = () => parseInt(operador1 * operador2);
-            alert('El resultado es: ' + resultado());
+            calculator.lastResult = calculator.mul(operadores);
             break;
 
         case '/':
-            resultado = () => parseInt(operador1 / operador2);
-            alert('El resultado es: ' + resultado());
+            calculator.lastResult = calculator.div(operadores);
             break;
 
     }
@@ -98,5 +130,6 @@ while (repeat) {
     repeat = confirm('Quieres realizar otra operación?');
 
 }
+operadores = validar();
 
 console.log(operacion);
