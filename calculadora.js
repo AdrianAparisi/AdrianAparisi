@@ -150,7 +150,7 @@ function validar() {
     } catch (error){
         if (error.name === "ErrorOperador") {
             alert(error.message);
-            return validar();
+            validar();
         }
     }
     console.log(operacion);
